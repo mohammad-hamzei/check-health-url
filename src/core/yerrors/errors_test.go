@@ -20,9 +20,9 @@ func TestE(t *testing.T) {
 	}{
 		{
 			"Simple",
-			args{args: []interface{}{err.Op("GL.findByID"), err.KindNotFound, errors.New("not found error")}},
+			args{args: []interface{}{err.Op("TC.findByID"), err.KindNotFound, errors.New("not found error")}},
 			&err.Error{
-				Op:   "GL.findByID",
+				Op:   "TC.findByID",
 				Kind: err.KindNotFound,
 				Err:  errors.New("not found error"),
 			},
@@ -30,21 +30,21 @@ func TestE(t *testing.T) {
 		{
 			"Nested",
 			args{args: []interface{}{
-				err.Op("GL.found"),
+				err.Op("TC.found"),
 				err.KindUnauthorized,
 				&err.Error{
-					Op:   "GL.found",
+					Op:   "TC.found",
 					Kind: err.KindNotFound,
-					Err:  errors.New("GL not found error"),
+					Err:  errors.New("TC not found error"),
 				},
 			}},
 			&err.Error{
-				Op:   "GL.found",
+				Op:   "TC.found",
 				Kind: err.KindUnauthorized,
 				Err: &err.Error{
-					Op:   "GL.found",
+					Op:   "TC.found",
 					Kind: err.KindNotFound,
-					Err:  errors.New("GL not found error"),
+					Err:  errors.New("TC not found error"),
 				},
 			},
 		},
@@ -68,18 +68,18 @@ func TestError_Error(t *testing.T) {
 		{
 			"Error with nested error",
 			fields{
-				Op:   "GL.findByID",
+				Op:   "TC.findByID",
 				Kind: err.KindNotFound,
-				Err:  errors.New("GL not found"),
+				Err:  errors.New("TC not found"),
 			},
-			"GL not found",
+			"TC not found",
 		},
 		{
 			"Error with nested Error",
 			fields{
-				Op:   "GL.findByID",
+				Op:   "TC.findByID",
 				Kind: err.KindNotFound,
-				Err:  err.E(err.Op("GL.findByID"), errors.New("unexpected error")),
+				Err:  err.E(err.Op("TC.findByID"), errors.New("unexpected error")),
 			},
 			"unexpected error",
 		},
@@ -105,13 +105,13 @@ func TestOps(t *testing.T) {
 	}{
 		{
 			"Nested Errors",
-			args{e: err.E(err.Op("GL.findByID"), err.E(err.Op("GL.getAll")))},
-			[]err.Op{"GL.findByID", "GL.getAll"},
+			args{e: err.E(err.Op("TC.findByID"), err.E(err.Op("TC.getAll")))},
+			[]err.Op{"TC.findByID", "TC.getAll"},
 		},
 		{
 			"Error with nested error",
-			args{e: err.E(err.Op("GL.findByID"), errors.New("unexpected error"))},
-			[]err.Op{"GL.findByID"},
+			args{e: err.E(err.Op("TC.findByID"), errors.New("unexpected error"))},
+			[]err.Op{"TC.findByID"},
 		},
 	}
 	for _, tt := range tests {

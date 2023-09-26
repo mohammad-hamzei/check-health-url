@@ -9,5 +9,5 @@ type TashilcarRepository interface {
 	Get() ([]*entities.Tashilcar, error)
 	EnableCheckHealth(id uint64, enable bool) error
 	DeleteAPI(id uint64) error
-	UpdateResponseStatus(id uint64, status string) error
+	UpdateResponseStatus(id uint64, status uint16) error
 }

@@ -8,7 +8,7 @@ type Tashilcar struct {
 	RequestHTTPMethod       string `gorm:"<-:create"`
 	RequestHeaders          string `gorm:"<-:create"`
 	RequestBody             string `gorm:"<-:create"`
-	ResponseStatus          string `gorm:"<-:create"`
+	ResponseStatus          uint16 `gorm:"<-:create"`
 	CreatedAt               uint64 `gorm:"<-:create"`
 	UpdatedAt               uint64 `gorm:"<-:create"`
 }

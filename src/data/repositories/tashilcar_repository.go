@@ -108,7 +108,7 @@ func (t *tashilcarRepository) DeleteAPI(id uint64) error {
 	return nil
 }
 
-func (t *tashilcarRepository) UpdateResponseStatus(id uint64, status string) error {
+func (t *tashilcarRepository) UpdateResponseStatus(id uint64, status uint16) error {
 	const op yerrors.Op = "tashilcar_repository.UpdateResponseStatus"
 	err := t.databaseDS.UpdateResponseStatus(id, status)
 	if yerrors.IsNotNil(err) {

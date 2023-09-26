@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strconv"
 
 	"gorm.io/gorm"
@@ -52,7 +53,6 @@ func (p *Postgres) Insert(tashilcarModel models.TashilcarModel) error {
 		RequestHTTPMethod:       tashilcarModel.RequestHTTPMethod,
 		RequestHeaders:          tashilcarModel.RequestHeaders,
 		RequestBody:             tashilcarModel.RequestBody,
-		ResponseStatus:          tashilcarModel.ResponseStatus,
 	}
 	/* save TC in db */
 	dbErr := p.DB.WithContext(context.Background()).Create(dbTC).Error
@@ -91,11 +91,9 @@ func (p *Postgres) Get() ([]*models.TashilcarModel, error) {
 
 func (p *Postgres) EnableCheckHealth(id uint64, enable bool) error {
 	const op errs.Op = "postgres.EnableCheckHealth"
-	err := p.DB.WithContext(context.Background()).Table("tashilcar").Where("id = ?", id).Updates(
-		&models.TashilcarModel{
-			HealthCheck: enable,
-		}).Error
+	err := p.DB.WithContext(context.Background()).Table("tashilcar").Where("id = ?", id).Updates(map[string]interface{}{"health_check": enable}).Error
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	return nil
@@ -110,7 +108,7 @@ func (p *Postgres) DeleteAPI(id uint64) error {
 	return nil
 }
 
-func (p *Postgres) UpdateResponseStatus(id uint64, status string) error {
+func (p *Postgres) UpdateResponseStatus(id uint64, status uint16) error {
 	const op errs.Op = "postgres.EnableCheckHealth"
 	err := p.DB.WithContext(context.Background()).Table("tashilcar").Where("id = ?", id).Updates(
 		&models.TashilcarModel{

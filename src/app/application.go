@@ -30,7 +30,7 @@ func StartApplication() {
 }
 
 func StopApplication() {
-	fmt.Println("* GRPC SERVER STOPPED *")
+	fmt.Println("* SERVER STOPPED *")
 	db, err := di.DB().DB()
 	if errs.IsNotNil(err) {
 		panic("* FAILED TO GET GENERIC DB OBJECT *")

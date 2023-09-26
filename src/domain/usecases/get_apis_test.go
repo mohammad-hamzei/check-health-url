@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-// یک ماک‌آپ از ریپازیتوری برای تست ایجاد می‌کنیم.
 type MockRepository struct {
 	Err error
 }

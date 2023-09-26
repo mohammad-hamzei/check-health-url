@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	//go executeCronJob()
+	go executeCronJob()
 	//	@title			Go + Gin Tashilcar API
 	//	@version		1.0
 	//	@description	This is a sample server tashilcar server. You can visit the GitHub repository at https://github.com/LordGhostX/swag-gin-demo
@@ -43,10 +43,11 @@ func main() {
 	app.StopApplication()
 }
 
-func myTask() {
+func checkHealth() {
 	usecases.CheckHealth()
 }
 func executeCronJob() {
-	gocron.Every(1).Second().Do(myTask)
+	os.Getenv("CHECK_HEALTH_PER_MINUTE")
+	gocron.Every(1).Minutes().Do(checkHealth)
 	<-gocron.Start()
 }

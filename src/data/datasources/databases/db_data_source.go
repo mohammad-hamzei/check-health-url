@@ -14,7 +14,7 @@ type DBDataSource interface {
 	Get() ([]*models.TashilcarModel, error)
 	EnableCheckHealth(id uint64, enable bool) error
 	DeleteAPI(id uint64) error
-	UpdateResponseStatus(id uint64, status string) error
+	UpdateResponseStatus(id uint64, status uint16) error
 }
 
 func NewDBDataSource(db *gorm.DB) DBDataSource {
