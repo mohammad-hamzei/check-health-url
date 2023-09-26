@@ -1,0 +1,98 @@
+definitions:
+  entities.Tashilcar:
+    properties:
+      created_at:
+        type: integer
+      health_check:
+        type: boolean
+      health_check_time_interval:
+        type: integer
+      id:
+        type: integer
+      request_body:
+        type: string
+      request_headers:
+        type: string
+      request_http_method:
+        type: string
+      request_url:
+        type: string
+      response_status:
+        type: string
+      updated_at:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /url:
+    post:
+      operationId: create-entities.Tashilcar
+      parameters:
+      - description: entities.Tashilcar data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Tashilcar'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Tashilcar'
+        "400":
+          description: Bad Request
+          schema: {}
+  /url/:id:
+    delete:
+      operationId: delete-entities.Tashilcar-by-id
+      parameters:
+      - description: entities.Tashilcar.ID ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+        "404":
+          description: Not Found
+          schema: {}
+      summary: delete a entities.Tashilcar item by ID
+    put:
+      operationId: enable-check-health-entities.Tashilcar-by-id
+      parameters:
+      - description: entities.Tashilcar.ID ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+        "404":
+          description: Not Found
+          schema: {}
+      summary: enable cheack health a entities.Tashilcar item by ID
+  /urls:
+    get:
+      operationId: get-all-entities.Tashilcar
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Tashilcar'
+            type: array
+      summary: get all items in the entities.Tashilcar list
+swagger: "2.0"
