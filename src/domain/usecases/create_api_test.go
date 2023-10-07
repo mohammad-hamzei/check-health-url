@@ -6,8 +6,6 @@ import (
 )
 
 func (m *MockRepository) Insert(tashilcar *entities.Tashilcar) error {
-	// در اینجا می‌توانید عملیات موک‌آپ ریپازیتوری را انجام دهید.
-	// در این مثال، هیچ خطایی را برنمی‌گردانیم.
 	return nil
 }
 

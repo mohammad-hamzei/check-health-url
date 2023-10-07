@@ -1,14 +1,11 @@
 package app
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-	"net/http"
-	"time"
-
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"log"
+	"net/http"
 
 	"git.tashilcar.com/core/tashilcar/app/di"
 	errs "git.tashilcar.com/core/tashilcar/core/yerrors"
@@ -73,55 +70,7 @@ func (server *Server) Run(addr string) {
 	log.Fatal(http.ListenAndServe(addr, server.Router))
 }
 
-func startServer() {
-	mux := http.NewServeMux()
-
-	now := time.Now()
-
-	mux.HandleFunc("/today", func(rw http.ResponseWriter, _ *http.Request) {
-
-		rw.Write([]byte(now.Format(time.ANSIC)))
-	})
-
-	a := &Router{}
-	mux.HandleFunc("/today2", a.today2)
-	//a.initializeRoutes()
-
-	log.Println("Listening...")
-	http.ListenAndServe(":3000", mux)
-
-	// server.Run(":8080")
-
-}
-
-func example(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Location", fmt.Sprintf("%s%s/%d", r.Host, r.RequestURI, "success"))
-	JSON(w, http.StatusCreated, "exampleeeeeeeeeee")
-}
-
-func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
-	w.WriteHeader(statusCode)
-	err := json.NewEncoder(w).Encode(data)
-	if err != nil {
-		fmt.Fprintf(w, "%s", err.Error())
-	}
-}
-
 func (s *Router) initializeRoutes() {
 
 	fmt.Println("initializeRoutes")
-	// Home Route
-	s.Router.HandleFunc("/test", s.Home).Methods("GET")
-}
-
-func (s *Router) Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Home")
-
-	JSON(w, http.StatusOK, "Welcome To This Awesome API")
-}
-
-func (s *Router) today2(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("today2today2today2")
-
-	JSON(w, http.StatusOK, "Welcome To This today2 API")
 }
