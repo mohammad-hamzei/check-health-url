@@ -1,5 +1,3 @@
-# Tashilcar
-
 # check-health-url
 
 # stack
